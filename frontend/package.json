@@ -63,6 +63,7 @@
     "vaul": "^0.9.3",
     "zod": "^3.23.8"
   },
+    "proxy": "https://cloud.flowiseai.com",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",

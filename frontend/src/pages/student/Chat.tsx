@@ -52,8 +52,10 @@ const Chat = () => {
         "https://cloud.flowiseai.com/api/v1/prediction/5aeff95e-9800-4f0b-adc1-247a04f1eb2e",
         {
           method: "POST",
+          mode: "cors",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "authorization": import.meta.env.VITE_FLOWISE_API_KEY,
           },
           body: JSON.stringify(queryData)
         }
