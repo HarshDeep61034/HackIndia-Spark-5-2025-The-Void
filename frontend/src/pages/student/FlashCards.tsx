@@ -28,18 +28,20 @@ const Flashcards = () => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "authorization": import.meta.env.VITE_FLOWISE_API_KEY // Add the API key
           },
           body: JSON.stringify({
             question: `Generate 5 flashcards about "${topic}". Format your response as a JSON array with each object having "question" and "answer" fields. Keep the answers concise.`
           })
         }
       );
-
+  
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Error: ${response.status}`);
       }
-
+  
       const result = await response.json();
       
       // Parse the JSON from the AI response

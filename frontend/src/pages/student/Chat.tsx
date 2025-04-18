@@ -47,12 +47,11 @@ const Chat = () => {
         question: userQuery,
         history: chatHistory.length > 0 ? chatHistory : undefined
       };
-
+  
       const response = await fetch(
         "https://cloud.flowiseai.com/api/v1/prediction/5aeff95e-9800-4f0b-adc1-247a04f1eb2e",
         {
           method: "POST",
-          mode: "cors",
           headers: {
             "Content-Type": "application/json",
             "authorization": import.meta.env.VITE_FLOWISE_API_KEY,
@@ -60,12 +59,12 @@ const Chat = () => {
           body: JSON.stringify(queryData)
         }
       );
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || `Error: ${response.status}`);
       }
-
+  
       const result = await response.json();
       
       // Update chat history with the new exchange
@@ -74,7 +73,7 @@ const Chat = () => {
         { role: 'user', content: userQuery },
         { role: 'assistant', content: result.text || '' }
       ]);
-
+  
       return result.text || "I couldn't generate a response. Please try again.";
     } catch (error: any) {
       console.error('Error calling Flowise API:', error);
